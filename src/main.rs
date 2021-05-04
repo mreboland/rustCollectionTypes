@@ -67,4 +67,64 @@ fn main() {
     // let does_not_exist = v[100];
     // Doing the above will cause the the compiler to 'panic' and abort
     // We can safely access a vector without causing our program to panic by used the Vec::get method which never panics.
+
+    // HASH MAPS
+
+    // The type HashMap<K, V> stores a mapping of keys of some type K to values of some type V. Where vectors store values by an integer index, hash maps store values by key.
+    // Like vectors, hash maps are growable, store the data in the heap, and access to its items are checked at run time.
+
+    // In the following example, we're keeping track of a personal book review system. The keys are the book names, and the values are the reviews made by one specific user.
+
+    // You can create an empty hash map by using the HashMap::new method and then adding elements with the HashMap::insert method.
+
+    // Here we import HashMap from the collections portion of the standard library to bring its name into scope. This is similar to what other programming languages call an import.
+    use std::collections::HashMap;
+
+    let mut book_reviews: HashMap<String, String> = HashMap::new();
+
+    // Review some books
+    book_reviews.insert(
+        // .to_string() methods transforms a string literal (&str) value into String. This method is useful when we want our hash map to "own" the values it holds, instead of being a collection of references (pointers).
+        "Adventures of Huckleberry Finn".to_string(),
+        "My favourite book.".to_string(),
+    );
+
+    book_reviews.insert(
+        "Grimms' Fairy Tales".to_string(),
+        "Masterpiece.".to_string(),
+    );
+
+    book_reviews.insert(
+        "Pride and Prejudice".to_string(),
+        "Very enjoyable.".to_string(),
+    );
+
+    book_reviews.insert(
+        "The Adventures of Sherlock Holmes".to_string(),
+        "Eye lyked it alot.".to_string(),
+    );
+
+    // Querying our hash map
+    if !book_reviews.contains_key("Les Miserables") {
+        println!("we've got {} reviews, but Les Mis ain't one", book_reviews.len());
+    }
+
+    // Hash maps can use references to query for existing entries. This means that even if our hash map is of type HashMap<String, String>, we can use the &str or &String types to look up its keys.
+
+    // Like with vectors, looking for a nonexistent key causes the program to panic.
+
+    // Searching for an existing key returns the value associated to it
+    println!("Review for Jane: {}", book_reviews["Pride and Prejudice"]);
+
+    // But searching for a nonexisting key will cause a panic
+    // println!("Review for Herman: {}", book_reviews["Moby Dick"]);  // panics!
+
+    // Hash maps also have the .get() method for safely querying their content without causing any panic.
+
+    // We can remove entries from a hash map by using the .remove() method.
+
+    let sherlock = "The Adventures of Sherlock Holmes";
+    assert_eq!(book_reviews.contains_key(sherlock), true);
+    book_reviews.remove(sherlock);
+    assert_eq!(book_reviews.contains_key(sherlock), false);
 }
