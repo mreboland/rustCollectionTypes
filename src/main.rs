@@ -78,7 +78,7 @@ fn main() {
     // You can create an empty hash map by using the HashMap::new method and then adding elements with the HashMap::insert method.
 
     // Here we import HashMap from the collections portion of the standard library to bring its name into scope. This is similar to what other programming languages call an import.
-    use std::collections::HashMap;
+    // use std::collections::HashMap;
 
     let mut book_reviews: HashMap<String, String> = HashMap::new();
 
@@ -130,6 +130,18 @@ fn main() {
 
     indexing_tuple(); // no errors, works
     indexing_array(); // no errors, works
+
+    // For HashMap question:
+
+    let basket = fruit_basket();
+    assert!(
+        basket.len() >= 3,
+        "basket must have at least three types of fruits"
+    );
+    assert!(
+        basket.values().sum::<u32>() >= 5,
+        "basket must have at least five fruits"
+    );
 }
 
 
@@ -159,4 +171,22 @@ fn indexing_array() {
         "This is not the character for the letter d: {}",
         letter_d
     )
+}
+
+use std::collections::HashMap;
+
+fn fruit_basket() -> HashMap<String, u32> {
+    // let mut basket = todo!("declare your hash map here.");
+    let mut basket: HashMap<String, u32> = HashMap::new();
+
+    // Two bananas are already given for you :)
+    basket.insert(String::from("banana"), 2);
+
+    // TODO: Put more fruits in your basket here.
+
+    basket.insert(String::from("apple"), 3);
+    basket.insert(String::from("orange"), 1);
+
+    // need to return the basket so on function call it can receive the value.
+    return basket;
 }
